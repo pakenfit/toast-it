@@ -9,8 +9,8 @@ export const toastColor = {
 };
 
 export const INITIAL_TOP = -200;
-export const DURATION = 5000;
-export const TIMING = 1000;
+export const DURATION = 3000;
+export const TIMING = 700;
 
 export const DEFAULT_CONFIG: toastConfig = {
   type: 'info',

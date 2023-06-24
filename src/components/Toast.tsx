@@ -28,6 +28,7 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
   const currentRef = useRef<Animated.View>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const showTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const [config, setConfig] = useState<toastConfig>({
     ...DEFAULT_CONFIG,
     ...defaultConfig,
@@ -74,30 +75,48 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
     };
   });
 
-  const show = useCallback(
+  const quickShow = useCallback(
     (tConfig?: toastConfig) => {
-      if (visible) return;
-      setVisible(true);
-      setConfig((currentConfig) => ({ ...currentConfig, ...tConfig }));
-      top.value = topInset;
+      if (showTimeoutRef.current) {
+        clearTimeout(showTimeoutRef.current as NodeJS.Timeout);
+      }
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current);
+      }
+      showTimeoutRef.current = setTimeout(() => {
+        setVisible(true);
+        setConfig((currentConfig) => ({
+          ...currentConfig,
+          ...tConfig,
+        }));
+        top.value = topInset;
+        clearTimeout(showTimeoutRef.current as NodeJS.Timeout);
+      }, TIMING);
     },
-    [top, topInset, visible]
+    [top, topInset]
   );
 
   const hide = useCallback(() => {
     top.value = INITIAL_TOP;
     hideTimeoutRef.current = setTimeout(() => {
       setVisible(false);
-      setConfig((currentConfig) => ({
-        ...currentConfig,
-        ...{
-          ...DEFAULT_CONFIG,
-          ...defaultConfig,
-        },
-      }));
       clearTimeout(hideTimeoutRef.current as NodeJS.Timeout);
     }, TIMING);
-  }, [defaultConfig, top]);
+  }, [top]);
+
+  const show = useCallback(
+    (tConfig?: toastConfig) => {
+      if (visible) {
+        hide();
+        quickShow(tConfig);
+      } else {
+        setVisible(true);
+        setConfig((currentConfig) => ({ ...currentConfig, ...tConfig }));
+        top.value = topInset;
+      }
+    },
+    [hide, quickShow, top, topInset, visible]
+  );
 
   useEffect(() => {
     if (!visible) return;
@@ -117,6 +136,9 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
       }
       if (hideTimeoutRef.current) {
         clearTimeout(hideTimeoutRef.current);
+      }
+      if (showTimeoutRef.current) {
+        clearTimeout(showTimeoutRef.current);
       }
     };
   }, [visible, duration, hide, type]);
