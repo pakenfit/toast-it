@@ -3,7 +3,7 @@ import * as React from 'react';
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { toastColor } from '../../src/constants';
-import { Toast, useToast } from 'toast-it';
+import { Toast, useToast } from '@pakenfit/toast-it';
 
 export default function App() {
   const { toastRef, show } = useToast();

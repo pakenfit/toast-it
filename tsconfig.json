@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "toast-it": ["./src/index"]
+      "@pakenfit/toast-it": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
