@@ -120,3 +120,5 @@ MIT
 ---
 
 Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+
+Inspired by [react-hot-toast](https://github.com/timolins/react-hot-toast)
