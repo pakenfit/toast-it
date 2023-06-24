@@ -1,5 +1,5 @@
 {
-  "name": "toast-it",
+  "name": "@pakenfit/toast-it",
   "version": "1.0.0",
   "description": "Let's toast the health of your application",
   "main": "lib/commonjs/index",

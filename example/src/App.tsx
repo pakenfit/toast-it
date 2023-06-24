@@ -15,8 +15,8 @@ export default function App() {
           ref={toastRef}
           defaultConfig={{
             textNumberOfLines: 2,
-            bgColor: 'black',
-            textColor: 'white',
+            bgColor: 'white',
+            textColor: 'black',
           }}
         />
         <Pressable
@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 20,
+    backgroundColor: 'black',
   },
   box: {
     width: 60,
