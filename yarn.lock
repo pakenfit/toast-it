@@ -8443,7 +8443,7 @@ react-native-builder-bob@^0.20.0:
     fs-extra "^10.1.0"
     glob "^8.0.3"
     is-git-dirty "^2.0.1"
-    json5 "^2.2.1"
+    json5 "^2.2.2"
     kleur "^4.1.4"
     prompts "^2.4.2"
     which "^2.0.2"
