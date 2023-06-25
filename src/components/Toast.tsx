@@ -19,7 +19,7 @@ import { getIcon } from '../helpers';
 import { ToastRef, toastConfig } from '../types';
 
 interface Props extends AnimateProps<ViewProps> {
-  defaultConfig?: toastConfig;
+  defaultConfig?: Partial<toastConfig>;
 }
 
 export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {

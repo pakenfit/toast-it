@@ -4,7 +4,7 @@ export type toastType = 'success' | 'error' | 'warning' | 'info' | 'loading';
 
 export type toastConfig = {
   type?: toastType;
-  message?: string;
+  message: string;
   duration?: number | 'infinite';
   bgColor?: string;
   textColor?: string;
