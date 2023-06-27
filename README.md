@@ -2,8 +2,9 @@
 
 Let's toast to the health of your application
 
-<p align='center'>
-  <img src='./screenshots/demo.gif' width="300">
+<p align='center' style="display: flex">
+  <img src='./screenshots/demo_ios.gif' width="300">
+  <img src='./screenshots/demo_android.gif' width="300">
 </p>
 
 
