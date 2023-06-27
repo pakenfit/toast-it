@@ -73,7 +73,7 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
     return {
       top: withTiming(top.value, { duration: TIMING }),
     };
-  });
+  }, [top]);
 
   const quickShow = useCallback(
     (tConfig?: toastConfig) => {
@@ -150,12 +150,14 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
       style={[animatedStyle, styles.container, { backgroundColor: bgColor }]}
       ref={currentRef}
       onTouchStart={type === 'loading' ? undefined : hide}
+      testID="toast"
     >
       {getIcon(type, iconColor, iconSize)}
       <Text
         style={[styles.text, { color: textColor }]}
         numberOfLines={textNumberOfLines}
         ellipsizeMode="tail"
+        testID="toast-message"
       >
         {message}
       </Text>

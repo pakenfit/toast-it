@@ -16,5 +16,12 @@ export const useToast = () => {
     }
   }, []);
 
-  return { toastRef, show, hide };
+  const isVisible = useCallback(() => {
+    if (toastRef.current) {
+      return toastRef.current.isVisible();
+    }
+    return false;
+  }, []);
+
+  return { toastRef, show, hide, isVisible };
 };
