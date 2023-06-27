@@ -13,16 +13,44 @@ export const getIcon = (
 ): ReactNode => {
   switch (type) {
     case 'success':
-      return <CheckIcon fill={color || toastColor.success} size={size} />;
+      return (
+        <CheckIcon
+          fill={color || toastColor.success}
+          size={size}
+          testID="toast-success-icon"
+        />
+      );
     case 'error':
-      return <ErrorWarning fill={color || toastColor.error} size={size} />;
+      return (
+        <ErrorWarning
+          fill={color || toastColor.error}
+          size={size}
+          testID="toast-error-icon"
+        />
+      );
     case 'warning':
-      return <ErrorWarning fill={color || toastColor.warning} size={size} />;
+      return (
+        <ErrorWarning
+          fill={color || toastColor.warning}
+          size={size}
+          testID="toast-warning-icon"
+        />
+      );
     case 'info':
-      return <InfoIcon fill={color || toastColor.info} size={size} />;
+      return (
+        <InfoIcon
+          fill={color || toastColor.info}
+          size={size}
+          testID="toast-info-icon"
+        />
+      );
     case 'loading':
       return (
-        <ActivityIndicator size="small" color={color || toastColor.loading} />
+        <ActivityIndicator
+          size="small"
+          color={color || toastColor.loading}
+          testID="toast-loading-icon"
+        />
       );
   }
 };

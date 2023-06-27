@@ -92,7 +92,7 @@ The toast component accepts the following configuration options:
 ## API
 The Toast component provides the following methods through the toastRef:
 
-- `show(config?: toastConfig)`: Displays a toast message with the specified configuration.
+- `show(config: toastConfig)`: Displays a toast message with the specified configuration.
 - `hide()`: Hides the currently displayed toast message.
 - `isVisible()`: Returns a boolean indicating whether a toast message is currently visible.
 
@@ -111,6 +111,12 @@ yarn example ios
 or
 
 yarn example android
+```
+
+Run tests
+
+```
+yarn test
 ```
 
 ## License
