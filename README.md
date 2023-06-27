@@ -93,9 +93,34 @@ The toast component accepts the following configuration options:
 ## API
 The Toast component provides the following methods through the toastRef:
 
-- `show(config: toastConfig)`: Displays a toast message with the specified configuration.
+- `show(config: ToastConfig)`: Displays a toast message with the specified configuration.
 - `hide()`: Hides the currently displayed toast message.
 - `isVisible()`: Returns a boolean indicating whether a toast message is currently visible.
+
+## Types
+
+### ToastRef
+The `ToastRef` type represents the reference to the Toast component, allowing access to its methods. It has the following methods:
+
+- `show`: Shows the toast with the specified configuration.
+- `hide`: Hides the toast.
+- `isVisible`: Returns a boolean indicating whether the toast is currently visible.
+
+### ToastConfig
+The `ToastConfig` type represents the configuration options for the toast component. It has the following properties:
+
+```
+type ToastConfig = {
+  type?: toastType;
+  message: string;
+  duration?: number | 'infinite';
+  bgColor?: string;
+  textColor?: string;
+  iconColor?: string;
+  iconSize?: number;
+  textNumberOfLines?: number;
+}
+```
 
 
 ## Contributing

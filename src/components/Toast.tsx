@@ -16,10 +16,10 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DEFAULT_CONFIG, INITIAL_TOP, TIMING } from '../constants';
 import { getIcon } from '../helpers';
-import { ToastRef, toastConfig } from '../types';
+import { ToastRef, ToastConfig } from '../types';
 
 interface Props extends AnimateProps<ViewProps> {
-  defaultConfig?: Partial<toastConfig>;
+  defaultConfig?: Partial<ToastConfig>;
 }
 
 export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
@@ -29,7 +29,7 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const showTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const [config, setConfig] = useState<toastConfig>({
+  const [config, setConfig] = useState<ToastConfig>({
     ...DEFAULT_CONFIG,
     ...defaultConfig,
   });
@@ -76,7 +76,7 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
   }, [top]);
 
   const quickShow = useCallback(
-    (tConfig?: toastConfig) => {
+    (tConfig?: ToastConfig) => {
       if (showTimeoutRef.current) {
         clearTimeout(showTimeoutRef.current as NodeJS.Timeout);
       }
@@ -105,7 +105,7 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
   }, [top]);
 
   const show = useCallback(
-    (tConfig?: toastConfig) => {
+    (tConfig?: ToastConfig) => {
       if (visible) {
         hide();
         quickShow(tConfig);

@@ -1,4 +1,4 @@
-import { toastConfig } from 'src/types';
+import { ToastConfig } from 'src/types';
 
 export const toastColor = {
   success: '#4caf50',
@@ -12,7 +12,7 @@ export const INITIAL_TOP = -200;
 export const DURATION = 3000;
 export const TIMING = 700;
 
-export const DEFAULT_CONFIG: toastConfig = {
+export const DEFAULT_CONFIG: ToastConfig = {
   type: 'info',
   message: 'Info message',
   duration: DURATION,

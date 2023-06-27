@@ -2,7 +2,7 @@ import Animated from 'react-native-reanimated';
 
 export type toastType = 'success' | 'error' | 'warning' | 'info' | 'loading';
 
-export type toastConfig = {
+export type ToastConfig = {
   type?: toastType;
   message: string;
   duration?: number | 'infinite';
@@ -14,7 +14,7 @@ export type toastConfig = {
 };
 
 export interface ToastRef extends Animated.View {
-  show: (config?: toastConfig) => void;
+  show: (config: ToastConfig) => void;
   hide: () => void;
   isVisible: () => boolean;
 }
