@@ -24,12 +24,12 @@ yarn add @pakenfit/toast-it
 This library needs these dependencies to be installed in your project before you can use it:
 
 ```sh
-npm install react-native-gesture-handler react-native-reanimated react-native-safe-area-context --save
+npm install react-native-gesture-handler react-native-reanimated react-native-safe-area-context react-native-svg --save
 ```
 <p align="center">Or</p>
 
 ```sh
-yarn add react-native-gesture-handler react-native-reanimated react-native-safe-area-context
+yarn add react-native-gesture-handler react-native-reanimated react-native-safe-area-context react-native-svg
 ```
 
 ## Features

@@ -13,8 +13,10 @@ export type ToastConfig = {
   textNumberOfLines?: number;
 };
 
-export interface ToastRef extends Animated.View {
+type ToastMethods = {
   show: (config: ToastConfig) => void;
   hide: () => void;
   isVisible: () => boolean;
-}
+};
+
+export type ToastRef = Animated.View & ToastMethods;
