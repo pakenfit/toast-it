@@ -6,7 +6,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { StyleSheet, Text, View, ViewProps } from 'react-native';
+import { StyleSheet, Text, ViewProps } from 'react-native';
 import Animated, {
   AnimateProps,
   useAnimatedStyle,
@@ -25,7 +25,7 @@ interface Props extends AnimateProps<ViewProps> {
 export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
   const top = useSharedValue(INITIAL_TOP);
   const [visible, setVisible] = useState(false);
-  const currentRef = useRef<Animated.View>(null);
+  const currentRef = useRef<Animated.View | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const showTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -46,28 +46,16 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
     textNumberOfLines = 1,
   } = config;
 
-  useImperativeHandle(ref, () => ({
-    ...(currentRef.current as Animated.View),
-    show,
-    hide,
-    isVisible: () => visible,
-    getNode: () => currentRef?.current as View,
-    setState: (state: never) => {
-      if (currentRef?.current) {
-        currentRef.current.setState(state);
-      }
-    },
-    forceUpdate: () => {
-      if (currentRef?.current) {
-        currentRef.current.forceUpdate();
-      }
-    },
-    render: () => {
-      if (currentRef?.current) {
-        currentRef.current.render();
-      }
-    },
-  }));
+  useImperativeHandle(
+    ref,
+    () =>
+      ({
+        ...(currentRef.current as Animated.View),
+        show,
+        hide,
+        isVisible: () => visible,
+      } as ToastRef)
+  );
 
   const animatedStyle = useAnimatedStyle(() => {
     return {

@@ -42,7 +42,7 @@
     "android"
   ],
   "repository": "https://github.com/pakenfit/toast-it",
-  "author": "Pakenfit <mamadembele7@gmail.com> (https://github.com/pakenfit)",
+  "author": "Pakenfit <pakendux@gmail.com> (https://github.com/pakenfit)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/pakenfit/toast-it/issues"
@@ -79,6 +79,10 @@
     "react": "18.2.0",
     "react-native": "0.71.8",
     "react-native-builder-bob": "^0.20.0",
+    "react-native-gesture-handler": "^2.12.1",
+    "react-native-reanimated": "^3.4.2",
+    "react-native-safe-area-context": "^4.7.1",
+    "react-native-svg": "^13.12.0",
     "react-test-renderer": "^18.2.0",
     "release-it": "^15.0.0",
     "semver": "^7.5.3",
@@ -99,7 +103,8 @@
     "react-native": "*",
     "react-native-gesture-handler": "~2.9.0",
     "react-native-reanimated": "~2.14.4",
-    "react-native-safe-area-context": "4.5.0"
+    "react-native-safe-area-context": "~3.3.2",
+    "react-native-svg": "~12.1.1"
   },
   "engines": {
     "node": ">= 16.0.0"
@@ -184,10 +189,6 @@
     ]
   },
   "dependencies": {
-    "expo-modules-core": "^1.2.7",
-    "react-native-gesture-handler": "^2.12.0",
-    "react-native-reanimated": "^3.3.0",
-    "react-native-safe-area-context": "^4.6.3",
-    "react-native-svg": "13.4.0"
+    "expo-modules-core": "^1.2.7"
   }
 }
