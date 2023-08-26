@@ -11,12 +11,14 @@ import Animated, {
   AnimateProps,
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { DEFAULT_CONFIG, INITIAL_TOP, TIMING } from '../constants';
 import { getIcon } from '../helpers';
 import { ToastRef, ToastConfig } from '../types';
+import { View } from 'react-native';
 
 interface Props extends AnimateProps<ViewProps> {
   defaultConfig?: Partial<ToastConfig>;
@@ -44,6 +46,10 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
     iconColor,
     iconSize,
     textNumberOfLines = 1,
+    withBackdrop = false,
+    backdropColor = 'gray',
+    backdropOpacity = 0.8,
+    animationType = 'spring',
   } = config;
 
   useImperativeHandle(
@@ -59,7 +65,10 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
-      top: withTiming(top.value, { duration: TIMING }),
+      top:
+        animationType === 'spring'
+          ? withSpring(top.value, { duration: TIMING })
+          : withTiming(top.value, { duration: TIMING }),
     };
   }, [top]);
 
@@ -134,22 +143,32 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
   if (!visible) return null;
 
   return (
-    <Animated.View
-      style={[animatedStyle, styles.container, { backgroundColor: bgColor }]}
-      ref={currentRef}
-      onTouchStart={type === 'loading' ? undefined : hide}
-      testID="toast"
-    >
-      {getIcon(type, iconColor, iconSize)}
-      <Text
-        style={[styles.text, { color: textColor }]}
-        numberOfLines={textNumberOfLines}
-        ellipsizeMode="tail"
-        testID="toast-message"
+    <>
+      <Animated.View
+        style={[animatedStyle, styles.container, { backgroundColor: bgColor }]}
+        ref={currentRef}
+        onTouchStart={type === 'loading' ? undefined : hide}
+        testID="toast"
       >
-        {message}
-      </Text>
-    </Animated.View>
+        {getIcon(type, iconColor, iconSize)}
+        <Text
+          style={[styles.text, { color: textColor }]}
+          numberOfLines={textNumberOfLines}
+          ellipsizeMode="tail"
+          testID="toast-message"
+        >
+          {message}
+        </Text>
+      </Animated.View>
+      {withBackdrop && type === 'loading' && (
+        <View
+          style={[
+            styles.backdrop,
+            { backgroundColor: backdropColor, opacity: backdropOpacity },
+          ]}
+        />
+      )}
+    </>
   );
 });
 
@@ -173,5 +192,13 @@ const styles = StyleSheet.create({
   text: {
     color: 'black',
     textAlign: 'center',
+  },
+  backdrop: {
+    zIndex: 40,
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
 });

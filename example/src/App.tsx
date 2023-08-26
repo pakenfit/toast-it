@@ -3,22 +3,14 @@ import * as React from 'react';
 import { StyleSheet, View, Pressable, Text } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { toastColor } from '../../src/constants';
-import { Toast, useToast } from '@pakenfit/toast-it';
+import { ToastProvider, useToast } from '@pakenfit/toast-it';
 
-export default function App() {
-  const { toastRef, show } = useToast();
+const ToastShowCase = () => {
+  const { show, hide } = useToast();
 
   return (
-    <SafeAreaProvider>
+    <>
       <View style={styles.container}>
-        <Toast
-          ref={toastRef}
-          defaultConfig={{
-            textNumberOfLines: 2,
-            bgColor: 'white',
-            textColor: 'black',
-          }}
-        />
         <Pressable
           onPress={() =>
             show({
@@ -60,6 +52,7 @@ export default function App() {
             show({
               type: 'loading',
               message: 'This is a loading Toast🤙🏽',
+              withBackdrop: true,
             })
           }
           style={[styles.pressable, { backgroundColor: toastColor.loading }]}
@@ -79,6 +72,27 @@ export default function App() {
           <Text>Show warning Toast</Text>
         </Pressable>
       </View>
+      <View style={styles.hide}>
+        <Pressable onPress={hide} style={[styles.pressable]}>
+          <Text>Hide</Text>
+        </Pressable>
+      </View>
+    </>
+  );
+};
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <ToastProvider
+        defaultConfig={{
+          textNumberOfLines: 2,
+          bgColor: 'white',
+          textColor: 'black',
+        }}
+      >
+        <ToastShowCase />
+      </ToastProvider>
     </SafeAreaProvider>
   );
 }
@@ -101,5 +115,19 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     marginBottom: 10,
+  },
+  hide: {
+    backgroundColor: 'white',
+    position: 'absolute',
+    zIndex: 50,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    display: 'flex',
+    width: 200,
+    bottom: 100,
+    borderRadius: 10,
   },
 });

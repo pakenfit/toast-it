@@ -11,6 +11,10 @@ export type ToastConfig = {
   iconColor?: string;
   iconSize?: number;
   textNumberOfLines?: number;
+  withBackdrop?: boolean;
+  backdropColor?: string;
+  backdropOpacity?: number;
+  animationType?: 'timing' | 'spring';
 };
 
 type ToastMethods = {
