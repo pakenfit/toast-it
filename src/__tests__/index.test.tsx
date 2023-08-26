@@ -1,51 +1,49 @@
-import React from 'react';
+import React, { MutableRefObject, useRef } from 'react';
 import { render, renderHook, act } from '@testing-library/react-native';
-import { Toast, useToast } from '..';
+import { Toast, ToastRef } from '..';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { toastColor } from '../constants';
 
 describe('Toast', () => {
   it('renders toast message correctly', async () => {
-    const {
-      result: {
-        current: { toastRef, show, isVisible },
-      },
-    } = renderHook(() => useToast());
+    const { result } = renderHook(() => useRef<ToastRef>());
 
-    const { getByTestId } = render(<Toast ref={toastRef} />, {
-      wrapper: SafeAreaProvider,
-    });
+    const { getByTestId } = render(
+      <Toast ref={result.current as MutableRefObject<ToastRef>} />,
+      {
+        wrapper: SafeAreaProvider,
+      }
+    );
 
     act(() => {
-      show({
+      result.current.current?.show({
         message: 'Hello, world!',
       });
     });
 
-    expect(isVisible()).toBeTruthy();
+    expect(result.current.current?.isVisible()).toBeTruthy();
     expect(getByTestId('toast-message')).toBeTruthy();
     expect(getByTestId('toast-message').props.children).toBe('Hello, world!');
   });
 
   it('should render a success toast', async () => {
-    const {
-      result: {
-        current: { toastRef, show, isVisible },
-      },
-    } = renderHook(() => useToast());
+    const { result } = renderHook(() => useRef<ToastRef>());
 
-    const { getByTestId } = render(<Toast ref={toastRef} />, {
-      wrapper: SafeAreaProvider,
-    });
+    const { getByTestId } = render(
+      <Toast ref={result.current as MutableRefObject<ToastRef>} />,
+      {
+        wrapper: SafeAreaProvider,
+      }
+    );
 
     act(() => {
-      show({
+      result.current.current?.show({
         type: 'success',
         message: 'This is a success toast',
       });
     });
 
-    expect(isVisible()).toBeTruthy();
+    expect(result.current.current?.isVisible()).toBeTruthy();
     expect(getByTestId('toast-message')).toBeTruthy();
     expect(getByTestId('toast-message').props.children).toBe(
       'This is a success toast'
@@ -59,24 +57,23 @@ describe('Toast', () => {
   });
 
   it('should render an error toast', async () => {
-    const {
-      result: {
-        current: { toastRef, show, isVisible },
-      },
-    } = renderHook(() => useToast());
+    const { result } = renderHook(() => useRef<ToastRef>());
 
-    const { getByTestId } = render(<Toast ref={toastRef} />, {
-      wrapper: SafeAreaProvider,
-    });
+    const { getByTestId } = render(
+      <Toast ref={result.current as MutableRefObject<ToastRef>} />,
+      {
+        wrapper: SafeAreaProvider,
+      }
+    );
 
     act(() => {
-      show({
+      result.current.current?.show({
         type: 'error',
         message: 'This is an error toast',
       });
     });
 
-    expect(isVisible()).toBeTruthy();
+    expect(result.current.current?.isVisible()).toBeTruthy();
     expect(getByTestId('toast-message')).toBeTruthy();
     expect(getByTestId('toast-message').props.children).toBe(
       'This is an error toast'
@@ -88,24 +85,23 @@ describe('Toast', () => {
   });
 
   it('should render a warning toast', async () => {
-    const {
-      result: {
-        current: { toastRef, show, isVisible },
-      },
-    } = renderHook(() => useToast());
+    const { result } = renderHook(() => useRef<ToastRef>());
 
-    const { getByTestId } = render(<Toast ref={toastRef} />, {
-      wrapper: SafeAreaProvider,
-    });
+    const { getByTestId } = render(
+      <Toast ref={result.current as MutableRefObject<ToastRef>} />,
+      {
+        wrapper: SafeAreaProvider,
+      }
+    );
 
     act(() => {
-      show({
+      result.current.current?.show({
         type: 'warning',
         message: 'This is a warning toast',
       });
     });
 
-    expect(isVisible()).toBeTruthy();
+    expect(result.current.current?.isVisible()).toBeTruthy();
     expect(getByTestId('toast-message')).toBeTruthy();
     expect(getByTestId('toast-message').props.children).toBe(
       'This is a warning toast'
@@ -119,24 +115,23 @@ describe('Toast', () => {
   });
 
   it('should render a loading toast', async () => {
-    const {
-      result: {
-        current: { toastRef, show, isVisible },
-      },
-    } = renderHook(() => useToast());
+    const { result } = renderHook(() => useRef<ToastRef>());
 
-    const { getByTestId } = render(<Toast ref={toastRef} />, {
-      wrapper: SafeAreaProvider,
-    });
+    const { getByTestId } = render(
+      <Toast ref={result.current as MutableRefObject<ToastRef>} />,
+      {
+        wrapper: SafeAreaProvider,
+      }
+    );
 
     act(() => {
-      show({
+      result.current.current?.show({
         type: 'loading',
         message: 'This is a loading toast',
       });
     });
 
-    expect(isVisible()).toBeTruthy();
+    expect(result.current.current?.isVisible()).toBeTruthy();
     expect(getByTestId('toast-message')).toBeTruthy();
     expect(getByTestId('toast-message').props.children).toBe(
       'This is a loading toast'
@@ -150,15 +145,11 @@ describe('Toast', () => {
   });
 
   it('should render a toast with defaultConfig', async () => {
-    const {
-      result: {
-        current: { toastRef, show, isVisible },
-      },
-    } = renderHook(() => useToast());
+    const { result } = renderHook(() => useRef<ToastRef>());
 
     const { getByTestId } = render(
       <Toast
-        ref={toastRef}
+        ref={result.current as MutableRefObject<ToastRef>}
         defaultConfig={{
           bgColor: 'red',
           textColor: 'white',
@@ -174,12 +165,12 @@ describe('Toast', () => {
     );
 
     act(() => {
-      show({
+      result.current.current?.show({
         message: 'This is a toast',
       });
     });
 
-    expect(isVisible()).toBeTruthy();
+    expect(result.current.current?.isVisible()).toBeTruthy();
     expect(getByTestId('toast')).toBeTruthy();
     expect(getByTestId('toast').props.style.backgroundColor).toBe('red');
 

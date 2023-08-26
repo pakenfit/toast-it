@@ -7,6 +7,12 @@ Let's toast to the health of your application
   <img src='./screenshots/demo_android.gif' width="300">
 </p>
 
+<p>With animation type spring and backdrop for loading</p>
+<p align='center' style="display: flex">
+  <img src='./screenshots/demo_ios_spring_backdrop.gif' width="300">
+  <img src='./screenshots/demo_android_spring_backdrop.gif' width="300">
+</p>
+
 
 ## Installation
 
@@ -36,39 +42,45 @@ yarn add react-native-gesture-handler react-native-reanimated react-native-safe-
 
 - Fully customizable
 - Works on `Android` and `iOS` (not tested on `web` should work as well)
-- Compatible with Expo
+- Compatible with Expo Go
 - Written in Typescript
 
 
 ## Usage
 
 ```js
-import { Toast, useToast } from '@pakenfit/toast-it';
+import { ToastProvider, useToast } from '@pakenfit/toast-it';
+
+const ToastComponent = () => {
+  const { show, hide } = useToast();
+
+  return (
+    <View>
+      <Button
+        label='Show Toast'
+        onPress={() =>
+          show({
+            type: 'success',
+            message: 'This is a success Toast🤙🏽',
+          })
+        }
+      />
+    </View>
+  )
+}
 
 export default function App() {
-  const { toastRef, show } = useToast();
 
   return (
     <SafeAreaProvider>
-      <View style={styles.container}>
-        <Toast
-          ref={toastRef}
+        <ToastProvider
           defaultConfig={{
             textNumberOfLines: 2,
             bgColor: 'white',
             textColor: 'black',
           }}
         />
-        <Button
-          label='Show Toast'
-          onPress={() =>
-            show({
-              type: 'success',
-              message: 'This is a success Toast🤙🏽',
-            })
-          }
-        />
-      </View>
+        <ToastComponent/>
     </SafeAreaProvider>
   )
 }
@@ -87,6 +99,10 @@ The toast component accepts the following configuration options:
 - `iconColor (optional)`: The color of the toast icon. Default is undefined (uses default color for each type).
 - `iconSize (optional)`: The size of the toast icon. Default is undefined (uses default size for each type).
 - `textNumberOfLines (optional)`: The number of lines to display for the toast message. Default is `1`.
+- `withBackdrop (optional, only for type loading)`: If true a backdrop is set when loading. Default is `false`.
+-  `backdropColor (optional, only for type loading)`: Set the backdrop color.
+-  `backdropOpacity (optional, only for type loading)`: Set the backdrop opacity.
+-  `animationType`: The toast enter animation type. Possible values are `'timing'` and `'spring'`. Default is `'spring'`
 
 
 
@@ -119,6 +135,10 @@ type ToastConfig = {
   iconColor?: string;
   iconSize?: number;
   textNumberOfLines?: number;
+  withBackdrop?: boolean;
+  backdropColor?: string;
+  backdropOpacity?: number;
+  animationType?: 'timing' | 'spring'
 }
 ```
 
