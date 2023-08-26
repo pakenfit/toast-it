@@ -1,4 +1,5 @@
 import React, {
+  Component,
   forwardRef,
   useCallback,
   useEffect,
@@ -9,6 +10,7 @@ import React, {
 import { StyleSheet, Text, ViewProps } from 'react-native';
 import Animated, {
   AnimateProps,
+  AnimatedProps,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -27,7 +29,7 @@ interface Props extends AnimateProps<ViewProps> {
 export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
   const top = useSharedValue(INITIAL_TOP);
   const [visible, setVisible] = useState(false);
-  const currentRef = useRef<Animated.View | null>(null);
+  const currentRef = useRef<Component<AnimatedProps<ViewProps>> | null>(null);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const showTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -56,11 +58,11 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
     ref,
     () =>
       ({
-        ...(currentRef.current as Animated.View),
+        ...currentRef.current,
         show,
         hide,
         isVisible: () => visible,
-      } as ToastRef)
+      }) as ToastRef
   );
 
   const animatedStyle = useAnimatedStyle(() => {
