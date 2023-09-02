@@ -15,6 +15,10 @@ export type ToastConfig = {
   backdropColor?: string;
   backdropOpacity?: number;
   animationType?: 'timing' | 'spring';
+  containerStyle?: {
+    marginLeft?: number;
+    marginRight?: number;
+  };
 };
 
 type ToastMethods = {

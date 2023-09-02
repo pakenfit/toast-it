@@ -102,7 +102,8 @@ The toast component accepts the following configuration options:
 - `withBackdrop (optional, only for type loading)`: If true a backdrop is set when loading. Default is `false`.
 -  `backdropColor (optional, only for type loading)`: Set the backdrop color.
 -  `backdropOpacity (optional, only for type loading)`: Set the backdrop opacity.
--  `animationType`: The toast enter animation type. Possible values are `'timing'` and `'spring'`. Default is `'spring'`
+-  `animationType (optional)`: The toast enter animation type. Possible values are `'timing'` and `'spring'`. Default is `'spring'`.
+-  `containerStyle (optional)`: The toast container style. Only properties available are `'marginLeft'` and `'marginRight'`.
 
 
 
@@ -138,7 +139,11 @@ type ToastConfig = {
   withBackdrop?: boolean;
   backdropColor?: string;
   backdropOpacity?: number;
-  animationType?: 'timing' | 'spring'
+  animationType?: 'timing' | 'spring',
+  containerStyle?: {
+    marginLeft?: number;
+    marginRight?: number;
+  };
 }
 ```
 
