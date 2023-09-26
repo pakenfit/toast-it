@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    textAlign: 'center',
+    textAlign: 'left',
   },
   backdrop: {
     zIndex: 40,
