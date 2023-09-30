@@ -43,7 +43,6 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
     type,
     message,
     duration,
-    bgColor,
     textColor,
     iconColor,
     iconSize,
@@ -51,8 +50,8 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
     withBackdrop = false,
     backdropColor = 'gray',
     backdropOpacity = 0.8,
-    animationType = 'spring',
-    containerStyle = { marginLeft: 4, marginRight: 4 },
+    animationType = 'timing',
+    containerStyle = {},
   } = config;
 
   useImperativeHandle(
@@ -148,15 +147,7 @@ export const Toast = forwardRef<ToastRef, Props>(({ defaultConfig }, ref) => {
   return (
     <>
       <Animated.View
-        style={[
-          animatedStyle,
-          styles.container,
-          {
-            backgroundColor: bgColor,
-            marginLeft: containerStyle.marginLeft,
-            marginRight: containerStyle.marginRight,
-          },
-        ]}
+        style={[animatedStyle, styles.container, containerStyle]}
         ref={currentRef}
         onTouchStart={type === 'loading' ? undefined : hide}
         testID="toast"
@@ -193,7 +184,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     borderRadius: 100,
     paddingVertical: 8,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     backgroundColor: 'white',
     zIndex: 50,
     justifyContent: 'center',
@@ -202,7 +193,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: 'black',
-    textAlign: 'left',
+    flexShrink: 1,
   },
   backdrop: {
     zIndex: 40,

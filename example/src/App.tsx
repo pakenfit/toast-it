@@ -87,8 +87,10 @@ export default function App() {
       <ToastProvider
         defaultConfig={{
           textNumberOfLines: 2,
-          bgColor: 'white',
           textColor: 'black',
+          containerStyle: {
+            backgroundColor: 'white',
+          },
         }}
       >
         <ToastShowCase />

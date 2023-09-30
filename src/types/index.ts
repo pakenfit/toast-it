@@ -1,3 +1,4 @@
+import { ViewProps } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 export type toastType = 'success' | 'error' | 'warning' | 'info' | 'loading';
@@ -15,10 +16,7 @@ export type ToastConfig = {
   backdropColor?: string;
   backdropOpacity?: number;
   animationType?: 'timing' | 'spring';
-  containerStyle?: {
-    marginLeft?: number;
-    marginRight?: number;
-  };
+  containerStyle?: Omit<ViewProps['style'], 'position'>;
 };
 
 type ToastMethods = {

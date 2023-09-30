@@ -151,12 +151,14 @@ describe('Toast', () => {
       <Toast
         ref={result.current as MutableRefObject<ToastRef>}
         defaultConfig={{
-          bgColor: 'red',
           textColor: 'white',
           textNumberOfLines: 2,
           duration: 1000,
           iconColor: 'blue',
           iconSize: 30,
+          containerStyle: {
+            backgroundColor: 'red',
+          },
         }}
       />,
       {
